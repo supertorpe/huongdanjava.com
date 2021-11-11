@@ -18,9 +18,14 @@ public class SpringSecurityConfiguration {
     // @formatter:off
     http
         .authorizeRequests(authorizeRequests ->
-            authorizeRequests.anyRequest().authenticated()
+            authorizeRequests
+            .antMatchers("/custom-login").permitAll()
+            .anyRequest().authenticated()
         )
-        .formLogin(Customizer.withDefaults());
+        .formLogin(form -> form
+            .loginPage("/custom-login")
+            .loginProcessingUrl("/login"))
+        ;
     // @formatter:on
 
     return http.build();
