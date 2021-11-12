@@ -45,7 +45,7 @@ public class AuthorizationServerConfiguration {
       throws Exception {
     OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
-    return http.formLogin(Customizer.withDefaults()).build();
+    return http.formLogin(form -> form.loginPage("/custom-login")).build();
   }
 
   @Bean
